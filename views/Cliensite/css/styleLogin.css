@@ -1,0 +1,46 @@
+#body{
+    background: url(../images/backgrounds/fondoLogin.jpg) 100%;
+    background-size: cover;
+}
+#body2{
+    background: url(../images/backgrounds/fondosingin.jpg) 100%;
+    background-size: cover;
+}
+
+.block{
+    border-radius: 15px;
+    
+    backdrop-filter: blur(10px);  
+}
+
+.account .block{
+    background-color: transparent;
+    color: white;
+    border: 1px solid black;
+}
+
+.account .block p{
+    color: white; 
+}
+
+.account .block a{
+    color: white; 
+}
+
+.logo{
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.form-group{
+    border-radius: 15px;
+}
+
+.account .block form input[type=email], .account .block form input[type=password], .account .block form input[type=text]{
+    border-radius: 15px;
+}
+
+
+
+
+
