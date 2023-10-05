@@ -1206,7 +1206,7 @@
             echo "<script> location.href = '../views/Cliente/contact.php'</script>";
         }
 
-        //Mostrar servicios al cliente
+        //Mostrar las denuncias hechas por el cliente
         public function mostrarDenuncias($id){
 
             $f = null;
@@ -1230,6 +1230,27 @@
             return $f;
 
         }
+        
+        //Eliminar queja cliente
+        public function eliminarQuejaCliente($id){
+
+            
+            $objConexion = new Conexion();
+            $conexion = $objConexion-> get_conexion();
+
+            $eliminar = "DELETE FROM quejas WHERE NumerQueja=:id ";
+            $result = $conexion->prepare($eliminar);
+
+            $result->bindParam(":id", $id);
+            
+
+            $result->execute();
+
+            echo '<script> alert("Su queja a sido eliminada") </script>';
+            echo '<script>location.href="../views/Cliente/Denuncias.php"</script>';            
+
+        }
+
 
          
             

@@ -128,7 +128,7 @@ include "include-pag.php"
 				</ul>
 				<ul class="footer-menu text-uppercase">
 					<li>
-						<a href="contact.php">CONTACTO</a>
+						<a href="contact.php">¿Tienes alguna queja?</a>
 					</li>
 					<li>
 						<a href="shop-slidebar.html">REPUESTOS</a>

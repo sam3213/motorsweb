@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-09-2023 a las 07:28:46
--- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 8.0.2
+-- Tiempo de generación: 04-10-2023 a las 18:39:17
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `factura` (
   `Cantidad` int(30) NOT NULL,
   `PrecioUnitario` int(30) NOT NULL,
   `Total_Factura` int(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -54,7 +54,7 @@ CREATE TABLE `productos` (
   `Foto3` varchar(200) NOT NULL,
   `Foto4` varchar(200) NOT NULL,
   `InfoVendedor` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -74,8 +74,19 @@ CREATE TABLE `quejas` (
   `NumerQueja` int(30) NOT NULL,
   `Usuario` varchar(30) NOT NULL,
   `Descripcion` varchar(200) NOT NULL,
-  `Fecha` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Fecha` datetime DEFAULT current_timestamp(),
+  `Nombre` varchar(200) NOT NULL,
+  `Asunto` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `quejas`
+--
+
+INSERT INTO `quejas` (`NumerQueja`, `Usuario`, `Descripcion`, `Fecha`, `Nombre`, `Asunto`) VALUES
+(0, '1004510351', 'ffvgsgtrfgrgtegedrfedfedf', '2023-10-04 06:36:14', 'favian andres mancilla', 'adasfda'),
+(2, '1004510352', 'safsfasdf', '2023-10-04 06:50:29', 'favian', 'holaadsaf'),
+(12, '1004510353', 'afefwaf', '2023-10-04 09:55:35', 'fafaf', 'asfasf');
 
 -- --------------------------------------------------------
 
@@ -90,7 +101,7 @@ CREATE TABLE `servicios` (
   `Proveedor` varchar(30) NOT NULL,
   `Descripcion` varchar(200) NOT NULL,
   `Foto1` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `servicios`
@@ -116,15 +127,16 @@ CREATE TABLE `usuarios` (
   `Rol` varchar(20) NOT NULL,
   `Estado` varchar(15) NOT NULL,
   `Foto` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`Identificacion`, `TipoDocumento`, `Nombres`, `Apellidos`, `Email`, `Telefono`, `Clave`, `Rol`, `Estado`, `Foto`) VALUES
-('1004510351', 'Cc', 'Andres', 'Mancilla', 'Famancilla1@misena.edu.co', '3115662359', '202cb962ac59075b964b07152d234b70', 'Vendedor', 'Activo', '../Uploads/Usuarios/perfil1.jpg'),
-('1004510352', 'Cc', 'Melani fabiana', 'Mancilla angulo', 'fabianmancilla0707@gmail.com', '3115662359', '81dc9bdb52d04dc20036dbd8313ed055', 'Administrador', 'Activo', '../Uploads/Usuarios/perfil2.jpeg');
+('1004510351', 'Cc', 'Andres', 'Mancilla', 'Famancilla1@misena.edu.co', '3115662359', '202cb962ac59075b964b07152d234b70', 'Administrador', 'Activo', '../Uploads/Usuarios/perfil1.jpg'),
+('1004510352', 'Cc', 'Andres ', 'Mancilla', 'fabianmancilla0708@gmail.com', '3115662359', 'e73506c6eb01a0f29e30265deaf642a3', 'Cliente', 'Activo', '../Uploads/Usuarios/perfil2.jpeg'),
+('1004510353', 'Cc', 'Melani', 'Mancilla', 'loquesea@gmail.com', '65555555555', '09436b42cff38ac498b44b8200ace6e2', 'Cliente', 'Activo', '../Uploads/Usuarios/perfil1.jpg');
 
 -- --------------------------------------------------------
 
@@ -140,7 +152,7 @@ CREATE TABLE `ventas` (
   `Producto` varchar(200) NOT NULL,
   `Unidades` int(50) NOT NULL,
   `Precio unitario` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tablas volcadas
@@ -200,6 +212,12 @@ ALTER TABLE `factura`
 --
 ALTER TABLE `productos`
   MODIFY `IdProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
+
+--
+-- AUTO_INCREMENT de la tabla `quejas`
+--
+ALTER TABLE `quejas`
+  MODIFY `NumerQueja` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`

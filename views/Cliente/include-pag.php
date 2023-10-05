@@ -178,11 +178,9 @@
 					</li>
 					<!-- inicio de sesion -->
 					<li class="dropdown dropdown-slide hoverred">
-
 						<?php
 							verActividadBoton()
 						?>
-						<!-- <a href="miActividad.php">Mi actividad</a> -->
 							
 					</li><!-- / inisio de sesion -->
 

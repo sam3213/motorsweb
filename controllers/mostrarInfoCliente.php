@@ -38,7 +38,32 @@ function verActividadBoton()
 
   foreach ($result as $f) {
     echo '
-        <a href="miActividad.php?id='.$f['Identificacion'].'">Mi actividad</a>
+        
+        <a href="Denuncias.php?id='.$f['Identificacion'].'">Mi actividad</a> 
+
+      ';
+  }
+
+}
+
+function verActividadNav()
+{
+  //variable de sesion para el login
+  // si ya se inicio en el anterior archivo no debe existir en este
+  // session_start();
+  $id = $_SESSION['id'];
+
+  $objConsultas = new consultas();
+  $result = $objConsultas->verPerfil($id);
+
+  foreach ($result as $f) {
+    echo '
+        
+    <div class="navbar-nav">
+    <a class="nav-link active" aria-current="page" href="Denuncias.php?id=' . $f['Identificacion'] . '">Denuncias y quejas</a>
+    <a class="nav-link" href="Historial.php?id=' . $f['Identificacion'] . '">Historial de compras</a>
+    <a class="nav-link" href="#">Pricing</a>
+  </div> 
 
       ';
   }
@@ -205,153 +230,178 @@ function pefilEditar()
     ';
 
   }
+}
 
 
+function mostrarQuejas(){
+    $id = $_SESSION['id'];
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarDenuncias($id);
+    
+
+        if (!isset($result)) {
+            echo '<h2>No hay Quejas registradas hasta el momento</h2>';
+        } else {
+            foreach ($result as $f) {
+
+
+    echo'<tr>
+        <td>'.$f['Asunto'].'</td>
+        <td>'.$f['Descripcion'].'</td>
+        <td>'.$f['Fecha'].'</td>
+        <td>'.$f['Asunto'].'</td>
+        <td><a href="../../controllers/eliminarQuejaCliente.php?id='. $f['NumerQueja'] . '" class="btn btn-danger"><i class="ti-trash " ></i>  Eliminar</a></td>
+    </tr>';
+}
+        }
 
 }
 
-function verActividad()
-{
+// function verActividad()
+// {
 
-  $id = $_GET['id'];
+//   $id = $_GET['id'];
 
-  $objConsultas = new consultas();
-  $result = $objConsultas->mostrarDenuncias($id);
+//   $objConsultas = new consultas();
+//   $result = $objConsultas->mostrarDenuncias($id);
   
 
-  foreach ($result as $f) {
+//   if (!isset($result)) {
+//     echo '<h2>No hay Quejas registradas hasta el momento</h2>';
+//   } else {
+//   foreach ($result as $f) {
 
-    echo '
+//     echo '
         
-      <section id="main-content">
-      <div class="row">
+//       <section id="main-content">
+//       <div class="row">
         
-          <div class="col-lg-12">
-              <div class="card modificar-user">
-                  <ul class="nav nav-tabs" id="myTab" role="tablist">
-                      <li class="nav-item" role="presentation">
-                          <button class="nav-link active" id="home-tab" data-toggle="tab"
-                              data-target="#home" type="button" role="tab" aria-controls="home"
-                              aria-selected="true">Quejas o sugerencias hechas</button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="profile-tab" data-toggle="tab"
-                              data-target="#profile" type="button" role="tab" aria-controls="profile"
-                              aria-selected="false">Cambiar foto</button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="contact-tab" data-toggle="tab"
-                              data-target="#contact" type="button" role="tab" aria-controls="contact"
-                              aria-selected="false">Cambiar clave</button>
-                      </li>
+//           <div class="col-lg-12">
+//               <div class="card modificar-user">
+//                   <ul class="nav nav-tabs" id="myTab" role="tablist">
+//                       <li class="nav-item" role="presentation">
+//                           <button class="nav-link active" id="home-tab" data-toggle="tab"
+//                               data-target="#home" type="button" role="tab" aria-controls="home"
+//                               aria-selected="true">Quejas o sugerencias hechas</button>
+//                       </li>
+//                       <li class="nav-item" role="presentation">
+//                           <button class="nav-link" id="profile-tab" data-toggle="tab"
+//                               data-target="#profile" type="button" role="tab" aria-controls="profile"
+//                               aria-selected="false">Cambiar foto</button>
+//                       </li>
+//                       <li class="nav-item" role="presentation">
+//                           <button class="nav-link" id="contact-tab" data-toggle="tab"
+//                               data-target="#contact" type="button" role="tab" aria-controls="contact"
+//                               aria-selected="false">Cambiar clave</button>
+//                       </li>
                      
-                  </ul>
-                  <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane fade show active in" id="home" role="tabpanel"
-                          aria-labelledby="home-tab">
-                          <div class="table-responsive">
-                                        <table class="table table-hover ">
-                                            <thead>
-                                                <tr>
-                                                    <th>Asunto</th>
-                                                    <th>Descripcion</th>
-                                                    <th>Fecha</th>
-                                                    <th>Contestada</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>'.$f['Asunto'].'</td>
-                                                    <td>'.$f['Descripcion'].'</td>
-                                                    <td>'.$f['Fecha'].'</td>
-                                                    <td>'.$f['Asunto'].'</td>
-                                                </tr>
+//                   </ul>
+//                   <div class="tab-content" id="myTabContent">
+//                       <div class="tab-pane fade show active in" id="home" role="tabpanel"
+//                           aria-labelledby="home-tab">
+//                           <div class="table-responsive">
+//                                         <table class="table table-hover ">
+//                                             <thead>
+//                                                 <tr>
+//                                                     <th>Asunto</th>
+//                                                     <th>Descripcion</th>
+//                                                     <th>Fecha</th>
+//                                                     <th>Contestada</th>
+//                                                 </tr>
+//                                             </thead>
+//                                             <tbody>
+//                                                 <tr>
+//                                                     <td>'.$f['Asunto'].'</td>
+//                                                     <td>'.$f['Descripcion'].'</td>
+//                                                     <td>'.$f['Fecha'].'</td>
+//                                                     <td>'.$f['Asunto'].'</td>
+//                                                 </tr>
                                                 
                                                 
-                                            </tbody>
-                                        </table>
-                                    </div>
+//                                             </tbody>
+//                                         </table>
+//                                     </div>
 
-                                </div>
-                      </div>
+//                                 </div>
+//                       </div>
                       
                       
-                      <div class="tab-pane fade" id="profile" role="tabpanel"
-                          aria-labelledby="profile-tab">
-                          <form class="text-left clearfix" action="../../controllers/modificarFotoCliente.php" method="POST" enctype="multipart/form-Data">
-                              <div class="row ">
-                              <div class="form-group col-md-12">
-                                      <input type="number" class="form-control" value="'.$f['Identificacion'].'"
-                                          readonly placeholder="identificacion" name="identificacion">
-                                  </div>
+//                       <div class="tab-pane fade" id="profile" role="tabpanel"
+//                           aria-labelledby="profile-tab">
+//                           <form class="text-left clearfix" action="../../controllers/modificarFotoCliente.php" method="POST" enctype="multipart/form-Data">
+//                               <div class="row ">
+//                               <div class="form-group col-md-12">
+//                                       <input type="number" class="form-control" value="'.$f['Identificacion'].'"
+//                                           readonly placeholder="identificacion" name="identificacion">
+//                                   </div>
 
-                                  <div class="form-group col-md-12">
-                                      <label>foto de perfil:</label>
-                                      <input type="file" class="form-control" placeholder="Foto usuario"
-                                          name="foto" accept=".jpeg, .jpg, .png, .gif">
-                                  </div>
-
-
-                              </div>
-                              <div class="text-center">
-                                  <button type="submit"
-                                      class="btn btn-main text-center">Modificar</button>
-                              </div>
-                          </form>
-                      </div>
+//                                   <div class="form-group col-md-12">
+//                                       <label>foto de perfil:</label>
+//                                       <input type="file" class="form-control" placeholder="Foto usuario"
+//                                           name="foto" accept=".jpeg, .jpg, .png, .gif">
+//                                   </div>
 
 
-                      <div class="tab-pane fade" id="contact" role="tabpanel"
-                          aria-labelledby="contact-tab">
-                          <form class="text-left clearfix" action="../../controllers/modificarClaveCliente.php" method="POST" enctype="multipart/form-Data">
-                              <div class="row ">
+//                               </div>
+//                               <div class="text-center">
+//                                   <button type="submit"
+//                                       class="btn btn-main text-center">Modificar</button>
+//                               </div>
+//                           </form>
+//                       </div>
+
+
+//                       <div class="tab-pane fade" id="contact" role="tabpanel"
+//                           aria-labelledby="contact-tab">
+//                           <form class="text-left clearfix" action="../../controllers/modificarClaveCliente.php" method="POST" enctype="multipart/form-Data">
+//                               <div class="row ">
                                   
-                              <div class="form-group col-md-12">
-                                      <input type="number" class="form-control" value="'.$f['Identificacion'].'"
-                                          readonly placeholder="identificacion" name="identificacion">
-                                  </div>
+//                               <div class="form-group col-md-12">
+//                                       <input type="number" class="form-control" value="'.$f['Identificacion'].'"
+//                                           readonly placeholder="identificacion" name="identificacion">
+//                                   </div>
 
-                              <div class="form-group col-md-6">
-                                      <input type="password" class="form-control"
-                                          placeholder="Nueva clave" name="clave" required>
-                                  </div>
+//                               <div class="form-group col-md-6">
+//                                       <input type="password" class="form-control"
+//                                           placeholder="Nueva clave" name="clave" required>
+//                                   </div>
 
-                                  <div class="form-group col-md-6">
-                                      <input type="password" class="form-control"
-                                          placeholder="Confirmar clave" name="clave2" required>
-                                  </div>
+//                                   <div class="form-group col-md-6">
+//                                       <input type="password" class="form-control"
+//                                           placeholder="Confirmar clave" name="clave2" required>
+//                                   </div>
                                  
 
-                              </div>
-                              <div class="text-center">
-                                  <button type="submit"
-                                      class="btn btn-main text-center">Modificar</button>
-                              </div>
-                          </form>
-                      </div>
-                  </div>
+//                               </div>
+//                               <div class="text-center">
+//                                   <button type="submit"
+//                                       class="btn btn-main text-center">Modificar</button>
+//                               </div>
+//                           </form>
+//                       </div>
+//                   </div>
 
-              </div>
-          </div>
-      </div>
+//               </div>
+//           </div>
+//       </div>
 
 
-      <div class="row">
-          <div class="col-lg-12">
-              <div class="footer">
-                  <p>2018 © Admin Board. - <a href="#">example.com</a></p>
-              </div>
-          </div>
-      </div>
-  </section>
+//       <div class="row">
+//           <div class="col-lg-12">
+//               <div class="footer">
+//                   <p>2018 © Admin Board. - <a href="#">example.com</a></p>
+//               </div>
+//           </div>
+//       </div>
+//   </section>
     
-    ';
+//     ';
 
-  }
+//   }
 
 
-
-}
+//   }
+// }
 
 
 function mostrarServiciosIndexcliente(){

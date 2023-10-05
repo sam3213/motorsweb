@@ -50,4 +50,24 @@
 }
 
 
+.navbar-expand-lg .navbar-collapse{
+    justify-content: center ;
+}
+
+
+.navbar-expand-lg .navbar-collapse a:hover{
+    background-color: var(--colorPrimario);
+    color: #ffffff;
+    border-radius: 5px;
+
+}
+
+#texto{
+    text-align:center;
+    font-size: 30px;
+    border: 1px solid var(--colorPrimario);
+}
+
+
+
 
