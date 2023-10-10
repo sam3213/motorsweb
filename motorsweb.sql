@@ -23,6 +23,25 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+-- Estructura de tabla para la tabla `clientes`
+
+CREATE TABLE `clientes` (
+  `IdCliente` int(11) NOT NULL AUTO_INCREMENT,
+  `Identificacion` varchar(50) NOT NULL,
+  `Nombres` varchar(30) NOT NULL,
+  `Apellidos` varchar(30) NOT NULL,
+  `Email` varchar(40) NOT NULL,
+  `Telefono` varchar(40) NOT NULL,
+  PRIMARY KEY (`IdCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Volcado de datos para la tabla `clientes`
+INSERT INTO `clientes` (`Identificacion`, `Nombres`, `Apellidos`, `Email`, `Telefono`)
+VALUES ('1234567890', 'Juan', 'Pérez', 'juan@example.com', '555-123-4567');
+
+-- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `factura`
 --
